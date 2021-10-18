@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Rugby all blacks </title>
+</head>
+<body>
+    <h1>Moana club</h1>
+    <hr>
+    <h2>Menu</h2>
+    <nav>
+        <a href="index.html">Accueil</a>
+        <a href="sub-space.html">Espace abonnées</a>
+        <a href="matchs.html">Ambiance matchs</a>
+        <a href="highlight.html">Moments forts</a>
+        <a href="contact.html">Contact</a>        
+        <a href="players.html">Joueurs</a>   
+    </nav>
+    <hr>
+    <!-- La page "contact.html" doit inclure un formulaire de contact avec les éléments suivants◦nom et prénom◦email◦numéro 
+    de téléphone◦message◦bouton "envoyer"8.Le bouton "envoyer" permet de vérifier que ◦les champs "nom", "message" ne sont pas vides◦les champ email et numéro de tél sont au bons formats -->
+    <form>
+        <fieldset>
+            <legend>Nous contacter</legend>
+                <div class="form-example">
+                    <label for="name">Nom: </label>
+                    <input type="text" name="name" id="name" required>
+                </div>
+                <div class="form-example">
+                    <label for="name">Prenom: </label>
+                    <input type="text" name="lastname" id="lastname" >
+                </div>
+                <div class="form-example">
+                    <label for="email">email: </label>
+                    <input type="email" name="email" id="email" >
+                </div>
+                <div class="form-example">
+                    <label for="tel">Numéro téléphone: </label>
+                    <input type="tel" pattern="(?:(?:(?:\+|00)33[ ]?(?:\(0\)[ ]?)?)|0){1}[1-9]{1}([ .-]?)(?:\d{2}\1?){3}\d{2}" name="tel" id="tel" >
+                </div>   
+                <div class="form-example">
+                    <label for="msg">Message: </label>
+                    <textarea name="msg" id="msg" cols="30" rows="10"></textarea>
+                </div>             
+                <div class="form-example">
+                    <input type="submit" value="Envoyer">
+                </div>
+        </fieldset>
+      </form>
+</body>
+</html>
