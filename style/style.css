@@ -1,0 +1,76 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+body {
+  background-color: #000000;
+  color: #ffffffee;
+}
+a {
+  text-decoration: none;
+  color: #ffffffee;
+}
+h1 {
+  float: left;
+}
+h1,
+h2,
+h3,
+.logo {
+  letter-spacing: 1px;
+  font-family: "Fjalla One", cursive;
+  margin: 15px 10px 15px 15px;
+}
+.logo {
+  width: 50px;
+}
+nav {
+  display: flex;
+  justify-content: center;
+  padding: 50px;
+  background-color: #000000;
+}
+nav ul {
+  display: inline-flex;
+  width: auto;
+}
+nav ul li {
+  font-weight: bold;
+  list-style-type: none;
+  padding: 0px 30px;
+}
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+.active {
+  text-decoration: underline;
+  text-decoration-thickness: 5px;
+  text-decoration-color: #6495ed;
+}
+table,
+th,
+td {
+  border-bottom: 2px solid #8d8d8d;
+  padding: 0.5rem;
+  text-align: center;
+}
+table {
+  margin: auto;
+  border-collapse: collapse;
+  width: 70%;
+}
+th {
+  background-color: #727272;
+}
+td {
+  height: 30px;
+}
+tbody tr:nth-child(even) {
+  background: #2b2b2b;
+}
+table tbody tr:hover td,
+table tbody tr:hover th {
+  background-color: #bbbbbb;
+}
