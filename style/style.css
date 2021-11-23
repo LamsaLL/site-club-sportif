@@ -2,14 +2,17 @@
   margin: 0px;
   padding: 0px;
 }
+
 body {
   background-color: #000000;
   color: #ffffffee;
 }
+
 a {
   text-decoration: none;
   color: #ffffffee;
 }
+
 h1 {
   float: left;
 }
@@ -21,34 +24,79 @@ h3,
   font-family: "Fjalla One", cursive;
   margin: 15px 10px 15px 15px;
 }
+
 .logo {
   width: 50px;
 }
+
 nav {
   display: flex;
-  justify-content: center;
   padding: 50px;
   background-color: #000000;
 }
+
 nav ul {
+  list-style: none;
   display: inline-flex;
-  width: auto;
+  flex: 1;
+  justify-content: space-between;
 }
+
 nav ul li {
   font-weight: bold;
   list-style-type: none;
-  padding: 0px 30px;
 }
+
+nav li {
+  height: 50px;
+  line-height: 50px;
+  display: inline-block;
+}
+
+nav a {
+  color: #fff;
+  display: block;
+  transition: 0.5s background-color;
+}
+
+nav a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 5px;
+  text-decoration-color: #6495ed;
+}
+
+/* Sub Menus */
+nav li li {
+  font-size: 0.8em;
+}
+
+nav li ul {
+  position: absolute;
+  display: none;
+  width: 100%;
+}
+
+nav li:hover ul {
+  display: block;
+}
+
+nav li ul li {
+  display: block;
+  width: 115px;
+}
+
 .sticky {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
 }
+
 .active {
   text-decoration: underline;
   text-decoration-thickness: 5px;
   text-decoration-color: #6495ed;
 }
+
 table,
 th,
 td {
@@ -56,20 +104,25 @@ td {
   padding: 0.5rem;
   text-align: center;
 }
+
 table {
   margin: auto;
   border-collapse: collapse;
   width: 70%;
 }
+
 th {
   background-color: #727272;
 }
+
 td {
   height: 30px;
 }
+
 tbody tr:nth-child(even) {
   background: #2b2b2b;
 }
+
 table tbody tr:hover td,
 table tbody tr:hover th {
   background-color: #bbbbbb;
