@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function () {
     props: ["Nom", "Image", "Poste", "Description", "Actions"],
     datas: [
       {
-        id: "0",
         name: "Dane Coles",
         image: "/TP1/tp-front-clubsportif%20/img/dane-coles.jpeg",
         position: "Talonneur",
@@ -11,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
         actions: ["Modifier", "Supprimer"],
       },
       {
-        id: "1",
         name: "George Bower",
         image: "/TP1/tp-front-clubsportif%20/img/george-bower.jpg",
         position: "Pillier",
@@ -19,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
         actions: ["Modifier", "Supprimer"],
       },
       {
-        id: "2",
         name: "Joe Moody",
         image: "/TP1/tp-front-clubsportif%20/img/joe-moody.jpeg",
         position: "Pillier",
@@ -28,7 +25,6 @@ document.addEventListener("DOMContentLoaded", function () {
       },
 
       {
-        id: "3",
         name: "Patrick Tuopulotu",
         image: "/TP1/tp-front-clubsportif%20/img/patrick-tuopulotu.jpeg",
         position: "2ème ligne",
@@ -37,11 +33,13 @@ document.addEventListener("DOMContentLoaded", function () {
       },
     ],
   };
-  function removeAllChildNodes(parent) {
+
+  const removeAllChildNodes = (parent) => {
     while (parent.firstChild) {
       parent.removeChild(parent.firstChild);
     }
-  }
+  };
+
   const reloadTable = () => {
     const playersTable = document.getElementById("playersTable");
 
@@ -50,7 +48,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     fillTbody(playersTable, players.datas);
   };
+
   const update = (playerId) => {};
+
   const add = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
@@ -62,8 +62,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     addRow(players.datas.slice(-1).pop(), "td");
   };
+
   const remove = (playerId) => {
     const playersTable = document.getElementById("playersTable");
+    console.log(playerId);
+
     players.datas.splice(playerId, 1);
     reloadTable(playersTable, players.datas);
   };
@@ -102,43 +105,41 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const fillTbody = (table, datas) => {
     const tbody = table.querySelector("tbody");
-    datas.map((elements) => {
+    datas.map((elements, index) => {
       const tr = document.createElement("tr");
       tbody.appendChild(tr);
-      const id = elements.id;
+      const id = index;
       Object.entries(elements).map(([key, value]) => {
-        if (key !== "id") {
-          const td = document.createElement("td");
+        const td = document.createElement("td");
 
-          if (key === "image") {
-            const img = document.createElement("img");
-            img.setAttribute("src", value);
-            img.setAttribute("width", "400px");
-            td.appendChild(img);
-          } else if (key === "actions") {
-            value.map((action) => {
-              const btn = document.createElement("button");
-              btn.setAttribute("type", "button");
-              if (action === "Modifier") {
-                btn.onclick = () => {
-                  update(id);
-                };
-              } else {
-                btn.onclick = () => {
-                  remove(id);
-                };
-              }
+        if (key === "image") {
+          const img = document.createElement("img");
+          img.setAttribute("src", value);
+          img.setAttribute("width", "400px");
+          td.appendChild(img);
+        } else if (key === "actions") {
+          value.map((action) => {
+            const btn = document.createElement("button");
+            btn.setAttribute("type", "button");
+            if (action === "Modifier") {
+              btn.onclick = () => {
+                update(id);
+              };
+            } else {
+              btn.onclick = () => {
+                remove(id);
+              };
+            }
 
-              const text = document.createTextNode(action);
-              btn.appendChild(text);
-              td.appendChild(btn);
-            });
-          } else {
-            const text = document.createTextNode(value);
-            td.appendChild(text);
-          }
-          tr.appendChild(td);
+            const text = document.createTextNode(action);
+            btn.appendChild(text);
+            td.appendChild(btn);
+          });
+        } else {
+          const text = document.createTextNode(value);
+          td.appendChild(text);
         }
+        tr.appendChild(td);
       });
     });
   };
