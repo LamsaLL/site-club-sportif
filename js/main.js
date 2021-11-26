@@ -1,33 +1,89 @@
 document.addEventListener("DOMContentLoaded", function () {
   const players = {
-    props: ["Nom", "Image", "Poste", "Description"],
+    props: ["Nom", "Image", "Poste", "Description", "Actions"],
     datas: [
       {
+        id: "0",
         name: "Dane Coles",
         image: "/TP1/tp-front-clubsportif%20/img/dane-coles.jpeg",
         position: "Talonneur",
         description: "183cm / 110kg",
+        actions: ["Modifier", "Supprimer"],
       },
       {
+        id: "1",
         name: "George Bower",
         image: "/TP1/tp-front-clubsportif%20/img/george-bower.jpg",
         position: "Pillier",
         description: "186cm / 120kg",
+        actions: ["Modifier", "Supprimer"],
       },
       {
+        id: "2",
         name: "Joe Moody",
         image: "/TP1/tp-front-clubsportif%20/img/joe-moody.jpeg",
         position: "Pillier",
         description: "188cm / 120kg",
+        actions: ["Modifier", "Supprimer"],
       },
 
       {
+        id: "3",
         name: "Patrick Tuopulotu",
         image: "/TP1/tp-front-clubsportif%20/img/patrick-tuopulotu.jpeg",
         position: "2ème ligne",
         description: "198cm / 120kg",
+        actions: ["Modifier", "Supprimer"],
       },
     ],
+  };
+  function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+      parent.removeChild(parent.firstChild);
+    }
+  }
+  const reloadTable = () => {
+    const playersTable = document.getElementById("playersTable");
+
+    const tbody = playersTable.querySelector("tbody");
+    removeAllChildNodes(tbody);
+
+    fillTbody(playersTable, players.datas);
+  };
+  const update = (playerId) => {};
+  const add = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.target);
+
+    const value = Object.fromEntries(data.entries());
+
+    players.datas.push(value);
+    console.log(players.datas.slice(-1).pop());
+
+    addRow(players.datas.slice(-1).pop(), "td");
+  };
+  const remove = (playerId) => {
+    const playersTable = document.getElementById("playersTable");
+    players.datas.splice(playerId, 1);
+    reloadTable(playersTable, players.datas);
+  };
+
+  const addPlayerForm = document.getElementById("add-player-form");
+  addPlayerForm.addEventListener("submit", add);
+
+  const addRow = (datas, tableCase = null) => {
+    const playersTable = document.getElementById("playersTable");
+    const tbody = playersTable.querySelector("tbody");
+    const tr = document.createElement("tr");
+
+    Object.entries(datas).map(([key, value]) => {
+      console.log(value);
+      const c = document.createElement(tableCase);
+      c.appendChild(document.createTextNode(value));
+      tr.appendChild(c);
+    });
+
+    tbody.appendChild(tr);
   };
 
   const fillThead = (table, thTexts) => {
@@ -49,19 +105,38 @@ document.addEventListener("DOMContentLoaded", function () {
     datas.map((elements) => {
       const tr = document.createElement("tr");
       tbody.appendChild(tr);
+      const id = elements.id;
       Object.entries(elements).map(([key, value]) => {
-        if (key !== "image") {
+        if (key !== "id") {
           const td = document.createElement("td");
-          const text = document.createTextNode(value);
-          td.appendChild(text);
-          tr.appendChild(td);
-        } else {
-          const td = document.createElement("td");
-          const img = document.createElement("img");
-          img.setAttribute("src", value);
-          img.setAttribute("width", "400px");
 
-          td.appendChild(img);
+          if (key === "image") {
+            const img = document.createElement("img");
+            img.setAttribute("src", value);
+            img.setAttribute("width", "400px");
+            td.appendChild(img);
+          } else if (key === "actions") {
+            value.map((action) => {
+              const btn = document.createElement("button");
+              btn.setAttribute("type", "button");
+              if (action === "Modifier") {
+                btn.onclick = () => {
+                  update(id);
+                };
+              } else {
+                btn.onclick = () => {
+                  remove(id);
+                };
+              }
+
+              const text = document.createTextNode(action);
+              btn.appendChild(text);
+              td.appendChild(btn);
+            });
+          } else {
+            const text = document.createTextNode(value);
+            td.appendChild(text);
+          }
           tr.appendChild(td);
         }
       });
@@ -76,5 +151,4 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   fillTable();
-  fillMenu();
 });
