@@ -40,6 +40,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
+  const addActions = () => {};
+
   const reloadTable = () => {
     const playersTable = document.getElementById("playersTable");
 
@@ -53,19 +55,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const add = (event) => {
     event.preventDefault();
+    const playersTable = document.getElementById("playersTable");
+
     const data = new FormData(event.target);
 
     const value = Object.fromEntries(data.entries());
 
     players.datas.push(value);
-    console.log(players.datas.slice(-1).pop());
-
-    addRow(players.datas.slice(-1).pop(), "td");
+    reloadTable(playersTable, players.datas);
   };
 
   const remove = (playerId) => {
     const playersTable = document.getElementById("playersTable");
-    console.log(playerId);
 
     players.datas.splice(playerId, 1);
     reloadTable(playersTable, players.datas);
