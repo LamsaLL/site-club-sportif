@@ -51,17 +51,49 @@ document.addEventListener("DOMContentLoaded", function () {
     fillTbody(playersTable, players.datas);
   };
 
-  const update = (playerId) => {};
+  const update = (playerId, event) => {
+    const playersTable = document.getElementById("playersTable");
+    document.getElementById("edit-player-form").style.display = "block";
+
+    const player = players.datas[playerId];
+    document.getElementById("editName").value = player.name;
+    document.getElementById("editImage").value = player.image;
+    document.getElementById("editPosition").value = player.position;
+    document.getElementById("editDescription").value = player.description;
+
+    const editPlayerForm = document.getElementById("edit-player-form");
+    editPlayerForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = new FormData(event.target);
+      const value = Object.fromEntries(data.entries());
+      const newPlayer = {
+        name: value.editName,
+        image: value.editImage,
+        position: value.editPosition,
+        description: value.editDescription,
+        actions: ["Modifier", "Supprimer"],
+      };
+
+      players.datas.splice(playerId, 1, newPlayer);
+      reloadTable(playersTable, players.datas);
+    });
+  };
 
   const add = (event) => {
     event.preventDefault();
+
     const playersTable = document.getElementById("playersTable");
-
     const data = new FormData(event.target);
-
     const value = Object.fromEntries(data.entries());
+    const newPlayer = {
+      name: value.addName,
+      image: value.addImage,
+      position: value.addPosition,
+      description: value.addDescription,
+      actions: ["Modifier", "Supprimer"],
+    };
 
-    players.datas.push(value);
+    players.datas.push(newPlayer);
     reloadTable(playersTable, players.datas);
   };
 
