@@ -40,21 +40,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
-  const addActions = () => {};
-
   const reloadTable = () => {
-    const playersTable = document.getElementById("playersTable");
-
-    const tbody = playersTable.querySelector("tbody");
+    const tbody = document.querySelector("tbody");
     removeAllChildNodes(tbody);
-
-    fillTbody(playersTable, players.datas);
+    fillTbody(players.datas);
   };
 
-  const update = (playerId, event) => {
-    const playersTable = document.getElementById("playersTable");
+  const update = (playerId) => {
     document.getElementById("edit-player-form").style.display = "block";
-
     const player = players.datas[playerId];
     document.getElementById("editName").value = player.name;
     document.getElementById("editImage").value = player.image;
@@ -75,14 +68,13 @@ document.addEventListener("DOMContentLoaded", function () {
       };
 
       players.datas.splice(playerId, 1, newPlayer);
-      reloadTable(playersTable, players.datas);
+      reloadTable();
     });
   };
 
   const add = (event) => {
     event.preventDefault();
 
-    const playersTable = document.getElementById("playersTable");
     const data = new FormData(event.target);
     const value = Object.fromEntries(data.entries());
     const newPlayer = {
@@ -94,94 +86,100 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     players.datas.push(newPlayer);
-    reloadTable(playersTable, players.datas);
+    reloadTable();
   };
 
   const remove = (playerId) => {
-    const playersTable = document.getElementById("playersTable");
-
     players.datas.splice(playerId, 1);
-    reloadTable(playersTable, players.datas);
+    reloadTable();
   };
 
   const addPlayerForm = document.getElementById("add-player-form");
   addPlayerForm.addEventListener("submit", add);
 
-  const addRow = (datas, tableCase = null) => {
-    const playersTable = document.getElementById("playersTable");
-    const tbody = playersTable.querySelector("tbody");
-    const tr = document.createElement("tr");
-
-    Object.entries(datas).map(([key, value]) => {
-      console.log(value);
-      const c = document.createElement(tableCase);
-      c.appendChild(document.createTextNode(value));
-      tr.appendChild(c);
-    });
-
-    tbody.appendChild(tr);
+  const createTableHead = (tr, text) => {
+    const th = document.createElement("th");
+    const thContent = document.createTextNode(text);
+    th.appendChild(thContent);
+    tr.appendChild(th);
   };
 
-  const fillThead = (table, thTexts) => {
-    const thead = table.querySelector("thead");
-    const tr = document.createElement("tr");
+  const createTableCase = (
+    tr,
+    tagName = null,
+    text = null,
+    attrValue = null,
+    index = null
+  ) => {
+    const td = document.createElement("td");
 
-    thead.appendChild(tr);
-
-    thTexts.map((thText) => {
-      const th = document.createElement("th");
-      const text = document.createTextNode(thText);
-      th.appendChild(text);
-      tr.appendChild(th);
-    });
-  };
-
-  const fillTbody = (table, datas) => {
-    const tbody = table.querySelector("tbody");
-    datas.map((elements, index) => {
-      const tr = document.createElement("tr");
-      tbody.appendChild(tr);
-      const id = index;
-      Object.entries(elements).map(([key, value]) => {
-        const td = document.createElement("td");
-
-        if (key === "image") {
-          const img = document.createElement("img");
-          img.setAttribute("src", value);
-          img.setAttribute("width", "400px");
-          td.appendChild(img);
-        } else if (key === "actions") {
-          value.map((action) => {
-            const btn = document.createElement("button");
-            btn.setAttribute("type", "button");
-            if (action === "Modifier") {
-              btn.onclick = () => {
-                update(id);
-              };
-            } else {
-              btn.onclick = () => {
-                remove(id);
-              };
-            }
-
-            const text = document.createTextNode(action);
-            btn.appendChild(text);
-            td.appendChild(btn);
-          });
+    if (tagName === "img") {
+      const img = document.createElement("img");
+      img.setAttribute("src", attrValue);
+      img.setAttribute("width", "400px");
+      td.appendChild(img);
+    } else if (tagName === "button") {
+      text.map((t) => {
+        const btn = document.createElement("button");
+        btn.setAttribute("type", "button");
+        const textNode = document.createTextNode(t);
+        if (t === "Modifier") {
+          btn.onclick = () => {
+            update(index);
+          };
         } else {
-          const text = document.createTextNode(value);
-          td.appendChild(text);
+          btn.onclick = () => {
+            remove(index);
+          };
         }
-        tr.appendChild(td);
+        btn.appendChild(textNode);
+        td.appendChild(btn);
       });
+    } else {
+      td.appendChild(document.createTextNode(text));
+    }
+    tr.appendChild(td);
+    return td;
+  };
+
+  const createTableRow = (parent, datas, index = null) => {
+    const tr = document.createElement("tr");
+    if (parent.tagName === "TBODY") {
+      Object.entries(datas).map(([key, value]) => {
+        if (key === "image") {
+          createTableCase(tr, "img", null, value);
+        } else if (key === "actions") {
+          createTableCase(tr, "button", value, null, index);
+        } else {
+          createTableCase(tr, null, value);
+        }
+      });
+    } else {
+      datas.map((data) => {
+        createTableHead(tr, data);
+      });
+    }
+
+    parent.appendChild(tr);
+    return tr;
+  };
+
+  const fillThead = (thTexts) => {
+    const thead = document.querySelector("thead");
+    createTableRow(thead, thTexts);
+  };
+
+  const fillTbody = (datas) => {
+    const tbody = document.querySelector("tbody");
+
+    datas.map((data, index) => {
+      createTableRow(tbody, data, index);
     });
   };
 
   const fillTable = () => {
-    const playersTable = document.getElementById("playersTable");
-
-    fillThead(playersTable, players.props);
-    fillTbody(playersTable, players.datas);
+    fillThead(players.props);
+    fillTbody(players.datas);
   };
 
   fillTable();
