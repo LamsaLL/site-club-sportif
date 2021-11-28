@@ -164,9 +164,9 @@ document.addEventListener("DOMContentLoaded", function () {
     return tr;
   };
 
-  const fillThead = (thTexts) => {
+  const fillThead = (datas) => {
     const thead = document.querySelector("thead");
-    createTableRow(thead, thTexts);
+    createTableRow(thead, datas);
   };
 
   const fillTbody = (datas) => {
