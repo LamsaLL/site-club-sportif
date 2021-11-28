@@ -34,6 +34,8 @@ document.addEventListener("DOMContentLoaded", function () {
     ],
   };
 
+  const table = document.getElementById("players-table");
+
   const removeAllChildNodes = (parent) => {
     while (parent.firstChild) {
       parent.removeChild(parent.firstChild);
@@ -41,22 +43,25 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   const reloadTable = () => {
-    const tbody = document.querySelector("tbody");
+    const tbody = table.querySelector("tbody");
+
     removeAllChildNodes(tbody);
     fillTbody(players.datas);
   };
 
-  const update = (playerId) => {
+  const updatePlayer = (playerId) => {
     document.getElementById("edit-player-form").style.display = "block";
     const player = players.datas[playerId];
+    const editPlayerForm = document.getElementById("edit-player-form");
+
     document.getElementById("editName").value = player.name;
     document.getElementById("editImage").value = player.image;
     document.getElementById("editPosition").value = player.position;
     document.getElementById("editDescription").value = player.description;
 
-    const editPlayerForm = document.getElementById("edit-player-form");
     editPlayerForm.addEventListener("submit", (event) => {
       event.preventDefault();
+
       const data = new FormData(event.target);
       const value = Object.fromEntries(data.entries());
       const newPlayer = {
@@ -72,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   };
 
-  const add = (event) => {
+  const addPlayer = (event) => {
     event.preventDefault();
 
     const data = new FormData(event.target);
@@ -89,18 +94,19 @@ document.addEventListener("DOMContentLoaded", function () {
     reloadTable();
   };
 
-  const remove = (playerId) => {
+  const addPlayerForm = document.getElementById("add-player-form");
+  addPlayerForm.addEventListener("submit", addPlayer);
+
+  const removePlayer = (playerId) => {
     players.datas.splice(playerId, 1);
     reloadTable();
   };
 
-  const addPlayerForm = document.getElementById("add-player-form");
-  addPlayerForm.addEventListener("submit", add);
-
-  const createTableHead = (tr, text) => {
+  const createTableHead = (tr, data) => {
     const th = document.createElement("th");
-    const thContent = document.createTextNode(text);
-    th.appendChild(thContent);
+    const text = document.createTextNode(data);
+
+    th.appendChild(text);
     tr.appendChild(th);
   };
 
@@ -119,31 +125,34 @@ document.addEventListener("DOMContentLoaded", function () {
       img.setAttribute("width", "400px");
       td.appendChild(img);
     } else if (tagName === "button") {
-      text.map((t) => {
+      text.map((buttonText) => {
         const btn = document.createElement("button");
+        const newText = document.createTextNode(buttonText);
         btn.setAttribute("type", "button");
-        const textNode = document.createTextNode(t);
-        if (t === "Modifier") {
+        if (buttonText === "Modifier") {
           btn.onclick = () => {
-            update(index);
+            updatePlayer(index);
           };
         } else {
           btn.onclick = () => {
-            remove(index);
+            removePlayer(index);
           };
         }
-        btn.appendChild(textNode);
+        btn.appendChild(newText);
         td.appendChild(btn);
       });
     } else {
       td.appendChild(document.createTextNode(text));
     }
+
     tr.appendChild(td);
+
     return td;
   };
 
   const createTableRow = (parent, datas, index = null) => {
     const tr = document.createElement("tr");
+
     if (parent.tagName === "TBODY") {
       Object.entries(datas).map(([key, value]) => {
         if (key === "image") {
@@ -161,16 +170,18 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     parent.appendChild(tr);
+
     return tr;
   };
 
   const fillThead = (datas) => {
-    const thead = document.querySelector("thead");
+    const thead = table.querySelector("thead");
+
     createTableRow(thead, datas);
   };
 
   const fillTbody = (datas) => {
-    const tbody = document.querySelector("tbody");
+    const tbody = table.querySelector("tbody");
 
     datas.map((data, index) => {
       createTableRow(tbody, data, index);
