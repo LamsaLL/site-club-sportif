@@ -49,15 +49,24 @@ document.addEventListener("DOMContentLoaded", function () {
     fillTbody(players.datas);
   };
 
+  const fillUpdateForm = (fields) => {
+    Object.entries(fields).map(([key, value]) => {
+      document.getElementById(`${key}`).value = value;
+    });
+  };
+
   const updatePlayer = (playerId) => {
     document.getElementById("edit-player-form").style.display = "block";
     const player = players.datas[playerId];
     const editPlayerForm = document.getElementById("edit-player-form");
+    const fields = {
+      editName: player.name,
+      editImage: player.image,
+      editPosition: player.position,
+      editDescription: player.description,
+    };
 
-    document.getElementById("editName").value = player.name;
-    document.getElementById("editImage").value = player.image;
-    document.getElementById("editPosition").value = player.position;
-    document.getElementById("editDescription").value = player.description;
+    fillUpdateForm(fields);
 
     editPlayerForm.addEventListener("submit", (event) => {
       event.preventDefault();
