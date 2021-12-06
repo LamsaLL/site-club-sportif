@@ -24,7 +24,25 @@ document.addEventListener("DOMContentLoaded", function () {
     const a = document.createElement("a");
 
     const text = document.createTextNode(navItemText);
-    a.setAttribute("href", `${pageName}` + ".html");
+    if (currPageName === "index") {
+      if (navItemText === "Accueil") {
+        a.setAttribute("href", `${pageName}` + ".html");
+      } else {
+        a.setAttribute(
+          "href",
+          "/TP1/tp-front-clubsportif /pages/" + `${pageName}` + ".html"
+        );
+      }
+    } else {
+      if (navItemText === "Accueil") {
+        a.setAttribute("href", "../" + `${pageName}` + ".html");
+      } else {
+        a.setAttribute(
+          "href",
+          "/TP1/tp-front-clubsportif /pages/" + `${pageName}` + ".html"
+        );
+      }
+    }
     a.appendChild(text);
     if (pageName === currPageName) {
       a.setAttribute("class", "active");
