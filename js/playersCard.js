@@ -85,6 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
     colDiv.setAttribute("class", "col");
 
     cardDiv.setAttribute("class", "card");
+
     colDiv.appendChild(cardDiv);
 
     img.setAttribute("src", player.image);

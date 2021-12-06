@@ -131,3 +131,12 @@ table tbody tr:hover th {
 #edit-player-form {
   display: none;
 }
+
+/* media queries */
+@media (min-width: 768px) {
+  #card-group {
+    font-weight: bold;
+    color: red;
+    background-color: lightgrey;
+  }
+}
