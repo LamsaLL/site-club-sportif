@@ -89,8 +89,6 @@ document.addEventListener("DOMContentLoaded", function () {
       deleteButton.setAttribute("href", "#");
       deleteButton.appendChild(document.createTextNode("Supprimer"));
       cardBodyDiv.appendChild(deleteButton);
-
-      console.log("test");
     } else if (session === "user") {
       const discoverLink = document.createElement("a");
       discoverLink.setAttribute("href", "#");
