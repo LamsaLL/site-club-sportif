@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   const menu = {
-    index: "Accueil",
+    home: "Accueil",
     subSpace: [
       "Espaces abonnées",
       "Connexion",
@@ -21,29 +21,42 @@ document.addEventListener("DOMContentLoaded", function () {
     ul
   ) => {
     const li = document.createElement("li");
-    const a = document.createElement("a");
+    const button = document.createElement("button");
     const text = document.createTextNode(navItemText);
-    a.setAttribute("href", `#${pageName}`);
-    a.appendChild(text);
 
-    if (pageName === currPageName) {
-      a.setAttribute("class", "active");
-    }
+    li.setAttribute("class", "nav-item");
+    li.setAttribute("role", "presentation");
+
+    button.setAttribute("class", "nav-link");
+    button.setAttribute("id", `pills-${pageName}-tab`);
+    button.setAttribute("data-bs-toggle", "pill");
+    button.setAttribute("data-bs-target", `#pills-${pageName}`);
+    button.setAttribute("type", "button");
+    button.setAttribute("role", "tab");
+    button.setAttribute("aria-controls", `pills-${pageName}`);
+    button.setAttribute("aria-selected", `${pageName === currPageName}`);
+
+    button.appendChild(text);
+
+    // if (pageName === currPageName) {
+    //   button.setAttribute("class", "active");
+    // }
 
     ul.appendChild(li);
-    li.appendChild(a);
+    li.appendChild(button);
 
     return li;
   };
 
   const fillMenu = () => {
-    const ulNav = document.querySelector("nav > ul");
+    const ulNav = document.getElementById("nav-list");
     const currPageName = window.location.href.split("/").pop().split(".")[0];
 
     Object.entries(menu).map(([pageName, navItemText]) => {
       if (Array.isArray(navItemText)) {
         const li = createNavItem(navItemText[0], pageName, currPageName, ulNav);
         const ul = document.createElement("ul");
+        ul.setAttribute("class", "dropdown-menu");
 
         for (let i = 1; i < navItemText.length; i++) {
           const text = navItemText[i];
@@ -57,25 +70,4 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   fillMenu();
-
-  const toogleVisibility = (source, target) => {
-    source.style.display = "none";
-    target.style.display = "block";
-  };
-  const h = document.getElementById("index");
-  h.style.display = "block";
-
-  let links = document.querySelectorAll("nav > ul > li > a");
-  links.forEach(function (link) {
-    link.addEventListener("click", function (e) {
-      const idSource =
-        window.location.href.split("#")[1] === undefined
-          ? "index"
-          : window.location.href.split("#")[1];
-      const source = document.getElementById(`${idSource}`);
-      const idTarget = link.getAttribute("href").split("#").pop();
-      const target = document.getElementById(`${idTarget}`);
-      toogleVisibility(source, target);
-    });
-  });
 });

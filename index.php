@@ -14,7 +14,7 @@
     <title>Rugby all blacks</title>
 </head>
 
-<body>
+<body class=".bg-dark.bg-gradient">
     <?php include('php/login.php')?>
     <header>
         <h1>Les ALL BLACKS</h1>
@@ -26,9 +26,9 @@
         Se connecter
     </button>
 
-    <nav class="sticky">
-        <ul></ul>
-    </nav>
+    <ul id="nav-list" class="nav nav-pills">
+
+    </ul>
 
     <input id="session" type="hidden" value="<?php echo $_SESSION['user']?>">
 
@@ -62,173 +62,176 @@
         </div>
     </div>
 
-    <section id="index" style="display: none">
-        <section class="desc">
-            <h2>Description générale</h2>
-            <blockquote>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                culpa qui officia deserunt mollit anim id est laborum.
-            </blockquote>
-            <i>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                culpa qui officia deserunt mollit anim id est laborum.
-            </i>
-        </section>
-        <section class="infos">
-            <h3>Infos pratique</h3>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-        </section>
-    </section>
-
-    <section id="subSpace" style="display: none">
-        <ul>
-            <li>
-                <a id="login" href="">Connexion</a>
-            </li>
-            <li>
-                <a href="">Mes informations</a>
-                <ol>
-                    <li>Nom</li>
-                    <li>Prénom</li>
-                    <li>Numéro de téléphone</li>
-                    <li>Email</li>
-                </ol>
-            </li>
-            <li>
-                <a href="">Messagerie</a>
-            </li>
-            <li>
-                <a href="">Historique</a>
-            </li>
-        </ul>
-    </section>
-
-    <section id="matchs" style="display: none">
-        <ul>
-            <li>
-                <figure>
-                    <figcaption>Boooooooooo</figcaption>
-                    <audio autoplay controls src="audio/applause.mp3">
-                        Your browser does not support the
-                        <code>audio</code> element.
-                    </audio>
-                </figure>
-            </li>
-            <li>
-                <figure>
-                    <figcaption>Clap clap clap</figcaption>
-                    <audio controls src="audio/applause.mp3">
-                        Your browser does not support the
-                        <code>audio</code> element.
-                    </audio>
-                </figure>
-            </li>
-            <li>
-                <figure>
-                    <figcaption>C'est raté</figcaption>
-                    <audio controls src="audio/boooo.mp3">
-                        Your browser does not support the
-                        <code>audio</code> element.
-                    </audio>
-                </figure>
-            </li>
-            <li>
-                <figure>
-                    <figcaption>cwdaaaAah</figcaption>
-                    <audio controls src="audio/cwdaaaAah.mp3">
-                        Your browser does not support the
-                        <code>audio</code> element.
-                    </audio>
-                </figure>
-            </li>
-        </ul>
-    </section>
-
-    <section id="highlight" style="display: none">
-        <h2>Titre1</h2>
-        <p>Desc1</p>
-        <video controls width="250">
-            <source src="video/video1.mp4" type="video/mp4" />
-
-            Sorry, your browser doesn't support embedded videos.
-        </video>
-        <h2>Titre2</h2>
-        <p>Desc2</p>
-        <video controls autoplay width="250">
-            <source src="video/video2.mp4" type="video/mp4" />
-
-            Sorry, your browser doesn't support embedded videos.
-        </video>
-    </section>
-
-    <section id="players" style="display: none">
-        <form id="edit-player-form">
-            <label for="editName">Nom</label>
-            <input type="text" name="editName" id="editName" required />
-            <label for="editImage">Image</label>
-            <input type="text" name="editImage" id="editImage" required />
-            <label for="editPosition">Poste</label>
-            <input type="text" name="editPosition" id="editPosition" required />
-            <label for="editDescription">Description</label>
-            <input type="text" name="editDescription" id="editDescription" required />
-            <input type="submit" value="Modifier" />
-        </form>
-
-        <div class="container" style="margin-top: 100px">
-            <div id="card-group" class="row row-cols-1 row-cols-md-2 g-4"></div>
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+            <section class="desc">
+                <h2>Description générale</h2>
+                <blockquote>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat. Duis aute irure dolor in
+                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt mollit anim id est laborum.
+                </blockquote>
+                <i>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat. Duis aute irure dolor in
+                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt mollit anim id est laborum.
+                </i>
+            </section>
+            <section class="infos">
+                <h3>Infos pratique</h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat. Duis aute irure dolor in
+                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+            </section>
         </div>
-    </section>
 
-    <section id="contact" style="display: none">
-        <form>
-            <fieldset>
-                <legend>Nous contacter</legend>
-                <div class="form-example">
-                    <label for="name">Nom: </label>
-                    <input type="text" name="name" id="name" required />
-                </div>
-                <div class="form-example">
-                    <label for="name">Prenom: </label>
-                    <input type="text" name="lastname" id="lastname" />
-                </div>
-                <div class="form-example">
-                    <label for="email">email: </label>
-                    <input type="email" name="email" id="email" />
-                </div>
-                <div class="form-example">
-                    <label for="tel">Numéro téléphone: </label>
-                    <input type="tel"
-                        pattern="(?:(?:(?:\+|00)33[ ]?(?:\(0\)[ ]?)?)|0){1}[1-9]{1}([ .-]?)(?:\d{2}\1?){3}\d{2}"
-                        name="tel" id="tel" />
-                </div>
-                <div class="form-example">
-                    <label for="msg">Message: </label>
-                    <textarea name="msg" id="msg" cols="30" rows="10"></textarea>
-                </div>
-                <div class="form-example">
-                    <input type="submit" value="Envoyer" />
-                </div>
-            </fieldset>
-        </form>
-    </section>
+        <div class="tab-pane fade show " id="pills-subSpace" role="tabpanel" aria-labelledby="pills-subSpace-tab">
+            <ul>
+                <li>
+                    <a id="login" href="">Connexion</a>
+                </li>
+                <li>
+                    <a href="">Mes informations</a>
+                    <ol>
+                        <li>Nom</li>
+                        <li>Prénom</li>
+                        <li>Numéro de téléphone</li>
+                        <li>Email</li>
+                    </ol>
+                </li>
+                <li>
+                    <a href="">Messagerie</a>
+                </li>
+                <li>
+                    <a href="">Historique</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tab-pane fade show" id="pills-matchs" role="tabpanel" aria-labelledby="pills-matchs-tab">
+            <ul>
+                <li>
+                    <figure>
+                        <figcaption>Boooooooooo</figcaption>
+                        <audio autoplay controls src="audio/applause.mp3">
+                            Your browser does not support the
+                            <code>audio</code> element.
+                        </audio>
+                    </figure>
+                </li>
+                <li>
+                    <figure>
+                        <figcaption>Clap clap clap</figcaption>
+                        <audio controls src="audio/applause.mp3">
+                            Your browser does not support the
+                            <code>audio</code> element.
+                        </audio>
+                    </figure>
+                </li>
+                <li>
+                    <figure>
+                        <figcaption>C'est raté</figcaption>
+                        <audio controls src="audio/boooo.mp3">
+                            Your browser does not support the
+                            <code>audio</code> element.
+                        </audio>
+                    </figure>
+                </li>
+                <li>
+                    <figure>
+                        <figcaption>cwdaaaAah</figcaption>
+                        <audio controls src="audio/cwdaaaAah.mp3">
+                            Your browser does not support the
+                            <code>audio</code> element.
+                        </audio>
+                    </figure>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tab-pane fade show" id="pills-highlight" role="tabpanel" aria-labelledby="pills-highlight-tab">
+            <h2>Titre1</h2>
+            <p>Desc1</p>
+            <video controls width="250">
+                <source src="video/video1.mp4" type="video/mp4" />
+
+                Sorry, your browser doesn't support embedded videos.
+            </video>
+            <h2>Titre2</h2>
+            <p>Desc2</p>
+            <video controls autoplay width="250">
+                <source src="video/video2.mp4" type="video/mp4" />
+
+                Sorry, your browser doesn't support embedded videos.
+            </video>
+        </div>
+
+
+        <div class="tab-pane fade show" id="pills-players" role="tabpanel" aria-labelledby="pills-players-tab">
+            <form id="edit-player-form">
+                <label for="editName">Nom</label>
+                <input type="text" name="editName" id="editName" required />
+                <label for="editImage">Image</label>
+                <input type="text" name="editImage" id="editImage" required />
+                <label for="editPosition">Poste</label>
+                <input type="text" name="editPosition" id="editPosition" required />
+                <label for="editDescription">Description</label>
+                <input type="text" name="editDescription" id="editDescription" required />
+                <input type="submit" value="Modifier" />
+            </form>
+
+            <div class="container" style="margin-top: 100px">
+                <div id="card-group" class="row row-cols-1 row-cols-md-2 g-4"></div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade show" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+            <form>
+                <fieldset>
+                    <legend>Nous contacter</legend>
+                    <div class="form-example">
+                        <label for="name">Nom: </label>
+                        <input type="text" name="name" id="name" required />
+                    </div>
+                    <div class="form-example">
+                        <label for="name">Prenom: </label>
+                        <input type="text" name="lastname" id="lastname" />
+                    </div>
+                    <div class="form-example">
+                        <label for="email">email: </label>
+                        <input type="email" name="email" id="email" />
+                    </div>
+                    <div class="form-example">
+                        <label for="tel">Numéro téléphone: </label>
+                        <input type="tel"
+                            pattern="(?:(?:(?:\+|00)33[ ]?(?:\(0\)[ ]?)?)|0){1}[1-9]{1}([ .-]?)(?:\d{2}\1?){3}\d{2}"
+                            name="tel" id="tel" />
+                    </div>
+                    <div class="form-example">
+                        <label for="msg">Message: </label>
+                        <textarea name="msg" id="msg" cols="30" rows="10"></textarea>
+                    </div>
+                    <div class="form-example">
+                        <input type="submit" value="Envoyer" />
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
 
     <!-- <script type="text/javascript" src="js/playerTables.js"></script> -->
     <script type="text/javascript" src="js/menu.js"></script>
