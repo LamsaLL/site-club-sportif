@@ -30,6 +30,7 @@
         <ul></ul>
     </nav>
 
+    <input id="session" type="hidden" value="<?php echo $_SESSION['user']?>">
 
     <!-- Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
@@ -125,7 +126,7 @@
             <li>
                 <figure>
                     <figcaption>Boooooooooo</figcaption>
-                    <audio autoplay controls src="../audio/applause.mp3">
+                    <audio autoplay controls src="audio/applause.mp3">
                         Your browser does not support the
                         <code>audio</code> element.
                     </audio>
@@ -134,7 +135,7 @@
             <li>
                 <figure>
                     <figcaption>Clap clap clap</figcaption>
-                    <audio controls src="../audio/applause.mp3">
+                    <audio controls src="audio/applause.mp3">
                         Your browser does not support the
                         <code>audio</code> element.
                     </audio>
@@ -143,7 +144,7 @@
             <li>
                 <figure>
                     <figcaption>C'est raté</figcaption>
-                    <audio controls src="../audio/boooo.mp3">
+                    <audio controls src="audio/boooo.mp3">
                         Your browser does not support the
                         <code>audio</code> element.
                     </audio>
@@ -152,7 +153,7 @@
             <li>
                 <figure>
                     <figcaption>cwdaaaAah</figcaption>
-                    <audio controls src="../audio/cwdaaaAah.mp3">
+                    <audio controls src="audio/cwdaaaAah.mp3">
                         Your browser does not support the
                         <code>audio</code> element.
                     </audio>
@@ -165,16 +166,14 @@
         <h2>Titre1</h2>
         <p>Desc1</p>
         <video controls width="250">
-            <source src="../video/video1.mp4" type="video/mp4" />
+            <source src="video/video1.mp4" type="video/mp4" />
 
             Sorry, your browser doesn't support embedded videos.
         </video>
         <h2>Titre2</h2>
         <p>Desc2</p>
         <video controls autoplay width="250">
-            <source src="/media/cc0-videos/flower.webm" type="video/webm" />
-
-            <source src="../video/video2.mp4" type="video/mp4" />
+            <source src="video/video2.mp4" type="video/mp4" />
 
             Sorry, your browser doesn't support embedded videos.
         </video>

@@ -31,47 +31,6 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   ];
 
-  {
-    /* <div class="row row-cols-1 row-cols-md-2 g-4">
-  <div class="col">
-    <div class="card">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-  </div>
-</div> */
-  }
-
   const createPlayerCard = (player) => {
     const colDiv = document.createElement("div");
     const cardDiv = document.createElement("div");
@@ -81,7 +40,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const ul = document.createElement("ul");
     const positionItem = document.createElement("li");
     const descriptionItem = document.createElement("li");
+    const session = document.getElementById("session").value;
 
+    console.log(session);
     colDiv.setAttribute("class", "col");
 
     cardDiv.setAttribute("class", "card");
@@ -115,6 +76,28 @@ document.addEventListener("DOMContentLoaded", function () {
     );
     ul.appendChild(descriptionItem);
 
+    if (session === "admin") {
+      const updateButton = document.createElement("a");
+      const deleteButton = document.createElement("a");
+
+      updateButton.setAttribute("class", "btn btn-primary");
+      updateButton.setAttribute("href", "#");
+      updateButton.appendChild(document.createTextNode("Modifier"));
+      cardBodyDiv.appendChild(updateButton);
+
+      deleteButton.setAttribute("class", "btn btn-danger");
+      deleteButton.setAttribute("href", "#");
+      deleteButton.appendChild(document.createTextNode("Supprimer"));
+      cardBodyDiv.appendChild(deleteButton);
+
+      console.log("test");
+    } else if (session === "user") {
+      const discoverLink = document.createElement("a");
+      discoverLink.setAttribute("href", "#");
+      discoverLink.setAttribute("class", "btn btn-primary");
+      discoverLink.appendChild(document.createTextNode("Découvrir"));
+      cardBodyDiv.appendChild(discoverLink);
+    }
     return colDiv;
   };
 
