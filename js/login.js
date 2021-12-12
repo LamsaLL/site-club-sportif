@@ -29,4 +29,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // login submit button
   document.getElementById("login-form").addEventListener("submit", onLogin);
+
+  // reload page on close bootstrap modal
+  document
+    .getElementById("loginModal")
+    .addEventListener("hidden.bs.modal", () => {
+      location.reload();
+    });
 });
