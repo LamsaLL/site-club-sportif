@@ -21,9 +21,45 @@
         <img src="img/logo-ab-white.jpg" alt="" class="logo" />
     </header>
     <h2>Menu</h2>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
+        Se connecter
+    </button>
+
     <nav class="sticky">
         <ul></ul>
     </nav>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Connexion</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="login-form" method="POST">
+                        <!-- user name and password -->
+                        <div class="form-group">
+                            <label for="login">Identifiant</label>
+                            <input type="text" class="form-control" id="login" placeholder="Entrer un identifiant" />
+                            <!-- user name -->
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Mot de passe</label>
+                            <input type="password" class="form-control" id="password" placeholder="Enter password" />
+                            <!-- password -->
+                        </div>
+                        <!-- submit -->
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                    <div id="error-message"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <section id="index" style="display: none">
         <section class="desc">
@@ -64,7 +100,7 @@
     <section id="subSpace" style="display: none">
         <ul>
             <li>
-                <a href="">Connexion</a>
+                <a id="login" href="">Connexion</a>
             </li>
             <li>
                 <a href="">Mes informations</a>
@@ -198,6 +234,7 @@
     <!-- <script type="text/javascript" src="js/playerTables.js"></script> -->
     <script type="text/javascript" src="js/menu.js"></script>
     <script type="text/javascript" src="js/playerCards.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
         integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous">
     </script>
