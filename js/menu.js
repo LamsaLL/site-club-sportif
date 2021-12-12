@@ -22,31 +22,14 @@ document.addEventListener("DOMContentLoaded", function () {
   ) => {
     const li = document.createElement("li");
     const a = document.createElement("a");
-
     const text = document.createTextNode(navItemText);
-    if (currPageName === "index") {
-      if (navItemText === "Accueil") {
-        a.setAttribute("href", `${pageName}` + ".html");
-      } else {
-        a.setAttribute(
-          "href",
-          "/TP1/tp-front-clubsportif /pages/" + `${pageName}` + ".html"
-        );
-      }
-    } else {
-      if (navItemText === "Accueil") {
-        a.setAttribute("href", "../" + `${pageName}` + ".html");
-      } else {
-        a.setAttribute(
-          "href",
-          "/TP1/tp-front-clubsportif /pages/" + `${pageName}` + ".html"
-        );
-      }
-    }
+    a.setAttribute("href", `#${pageName}`);
     a.appendChild(text);
+
     if (pageName === currPageName) {
       a.setAttribute("class", "active");
     }
+
     ul.appendChild(li);
     li.appendChild(a);
 
@@ -74,4 +57,25 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   fillMenu();
+
+  const toogleVisibility = (source, target) => {
+    source.style.display = "none";
+    target.style.display = "block";
+  };
+  const h = document.getElementById("index");
+  h.style.display = "block";
+
+  let links = document.querySelectorAll("nav > ul > li > a");
+  links.forEach(function (link) {
+    link.addEventListener("click", function (e) {
+      const idSource =
+        window.location.href.split("#")[1] === undefined
+          ? "index"
+          : window.location.href.split("#")[1];
+      const source = document.getElementById(`${idSource}`);
+      const idTarget = link.getAttribute("href").split("#").pop();
+      const target = document.getElementById(`${idTarget}`);
+      toogleVisibility(source, target);
+    });
+  });
 });

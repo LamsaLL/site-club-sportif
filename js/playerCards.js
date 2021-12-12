@@ -2,21 +2,21 @@ document.addEventListener("DOMContentLoaded", function () {
   const players = [
     {
       name: "Dane Coles",
-      image: "/TP1/tp-front-clubsportif%20/img/dane-coles.jpeg",
+      image: "img/dane-coles.jpeg",
       position: "Talonneur",
       description: "183cm / 110kg",
       actions: ["Modifier", "Supprimer"],
     },
     {
       name: "George Bower",
-      image: "/TP1/tp-front-clubsportif%20/img/george-bower.jpg",
+      image: "img/george-bower.jpg",
       position: "Pillier",
       description: "186cm / 120kg",
       actions: ["Modifier", "Supprimer"],
     },
     {
       name: "Joe Moody",
-      image: "/TP1/tp-front-clubsportif%20/img/joe-moody.jpeg",
+      image: "img/joe-moody.jpeg",
       position: "Pillier",
       description: "188cm / 120kg",
       actions: ["Modifier", "Supprimer"],
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     {
       name: "Patrick Tuopulotu",
-      image: "/TP1/tp-front-clubsportif%20/img/patrick-tuopulotu.jpeg",
+      image: "img/patrick-tuopulotu.jpeg",
       position: "2ème ligne",
       description: "198cm / 120kg",
       actions: ["Modifier", "Supprimer"],
