@@ -14,7 +14,7 @@
     <title>Rugby all blacks</title>
 </head>
 
-<body class=".bg-dark.bg-gradient">
+<body>
     <?php include('php/login.php')?>
     <header>
         <h1>Les ALL BLACKS</h1>
@@ -37,26 +37,26 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="loginModalLabel">Connexion</h5>
+                    <h5 class="modal-title text-dark" id="loginModalLabel">Connexion</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="login-form" method="POST">
                         <!-- user name and password -->
                         <div class="form-group">
-                            <label for="login">Identifiant</label>
+                            <label class="text-dark" for="login">Identifiant</label>
                             <input type="text" class="form-control" id="login" placeholder="Entrer un identifiant" />
                             <!-- user name -->
                         </div>
                         <div class="form-group">
-                            <label for="password">Mot de passe</label>
+                            <label class="text-dark" for="password">Mot de passe</label>
                             <input type="password" class="form-control" id="password" placeholder="Enter password" />
                             <!-- password -->
                         </div>
                         <!-- submit -->
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
-                    <div id="error-message"></div>
+                    <div class="text-dark" id="error-message"></div>
                 </div>
             </div>
         </div>
@@ -182,6 +182,27 @@
 
 
         <div class="tab-pane fade show" id="pills-players" role="tabpanel" aria-labelledby="pills-players-tab">
+
+            <form id="add-player-form">
+                <div id="form-group">
+                    <label for="addName">Nom</label>
+                    <input type="text" class="form-control" name="addName" id="addName" required />
+                </div>
+                <div id="form-group">
+                    <label for="addImage">Image</label>
+                    <input type="text" class="form-control" name="addImage" id="addImage" required />
+                </div>
+                <div id="form-group">
+                    <label for="addPosition">Poste</label>
+                    <input type="text" class="form-control" name="addPosition" id="addPosition" required />
+                </div>
+                <div id="form-group">
+                    <label for="addDescription">Description</label>
+                    <input type="text" class="form-control" name="addDescription" id="addDescription" required />
+                </div>
+                <input type="submit" value="Ajouter" />
+            </form>
+
             <form id="edit-player-form">
                 <label for="editName">Nom</label>
                 <input type="text" name="editName" id="editName" required />

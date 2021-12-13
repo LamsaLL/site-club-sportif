@@ -1,37 +1,14 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const players = [
-    {
-      name: "Dane Coles",
-      image: "img/dane-coles.jpeg",
-      position: "Talonneur",
-      description: "183cm / 110kg",
-      actions: ["Modifier", "Supprimer"],
-    },
-    {
-      name: "George Bower",
-      image: "img/george-bower.jpg",
-      position: "Pillier",
-      description: "186cm / 120kg",
-      actions: ["Modifier", "Supprimer"],
-    },
-    {
-      name: "Joe Moody",
-      image: "img/joe-moody.jpeg",
-      position: "Pillier",
-      description: "188cm / 120kg",
-      actions: ["Modifier", "Supprimer"],
-    },
+document.addEventListener("DOMContentLoaded", () => {
+  const addPLayerForm = document.getElementById("add-player-form");
 
-    {
-      name: "Patrick Tuopulotu",
-      image: "img/patrick-tuopulotu.jpeg",
-      position: "2ème ligne",
-      description: "198cm / 120kg",
-      actions: ["Modifier", "Supprimer"],
-    },
-  ];
+  const getPlayers = async () => {
+    //get players from json file
+    const response = await fetch("datas/players.json");
+    const players = await response.json();
+    return players;
+  };
 
-  const createPlayerCard = (player) => {
+  const createPlayerCards = (player) => {
     const colDiv = document.createElement("div");
     const cardDiv = document.createElement("div");
     const img = document.createElement("img");
@@ -101,11 +78,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const displayPlayerCards = () => {
     const cardGroup = document.getElementById("card-group");
-    Object.entries(players).map((player) => {
-      const playerCard = createPlayerCard(player[1]);
-      cardGroup.appendChild(playerCard);
+
+    getPlayers().then((players) => {
+      players.forEach((player) => {
+        cardGroup.appendChild(createPlayerCards(player));
+      });
     });
   };
+
+  //Listen on add player form
+  addPLayerForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    console.log("submit");
+    const name = document.getElementById("addName").value;
+    const position = document.getElementById("addPosition").value;
+    const description = document.getElementById("addDescription").value;
+    const image = document.getElementById("addImage").value;
+
+    const player = {
+      name: name,
+      position: position,
+      description: description,
+      image: image,
+    };
+
+    //write in datas/players.json to add player
+    const players = getPlayers();
+    players.then((players) => {
+      console.log(player);
+      players.push(player);
+    });
+  });
 
   displayPlayerCards();
 });

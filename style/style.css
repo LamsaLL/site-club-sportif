@@ -28,6 +28,12 @@ h3,
   width: 50px;
 }
 
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  border: 2px solid aqua;
+  background-color: transparent !important;
+}
+
 /* nav {
   display: flex;
   padding: 50px;

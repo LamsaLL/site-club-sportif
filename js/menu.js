@@ -38,10 +38,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     button.appendChild(text);
 
-    // if (pageName === currPageName) {
-    //   button.setAttribute("class", "active");
-    // }
-
     ul.appendChild(li);
     li.appendChild(button);
 
