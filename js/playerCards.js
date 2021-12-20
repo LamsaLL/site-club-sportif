@@ -3,9 +3,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const getPlayers = async () => {
     //get players from json file
-    const response = await fetch("datas/players.json");
+    const response = await fetch("php/players.json");
     const players = await response.json();
     return players;
+  };
+
+  const postPlayer = async (player) => {
+    //post player to json file
+    const response = await fetch("php/players.php", {
+      method: "POST",
+      body: player,
+    });
+    return await response.json();
   };
 
   const createPlayerCards = (player) => {
@@ -19,7 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const descriptionItem = document.createElement("li");
     const session = document.getElementById("session").value;
 
-    console.log(session);
     colDiv.setAttribute("class", "col");
 
     cardDiv.setAttribute("class", "card");
@@ -89,25 +97,20 @@ document.addEventListener("DOMContentLoaded", () => {
   //Listen on add player form
   addPLayerForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    console.log("submit");
     const name = document.getElementById("addName").value;
     const position = document.getElementById("addPosition").value;
     const description = document.getElementById("addDescription").value;
     const image = document.getElementById("addImage").value;
 
-    const player = {
-      name: name,
-      position: position,
-      description: description,
-      image: image,
-    };
+    //new form data
+    const formData = new FormData();
 
-    //write in datas/players.json to add player
-    const players = getPlayers();
-    players.then((players) => {
-      console.log(player);
-      players.push(player);
-    });
+    //add form data to formData
+    formData.append("name", name);
+    formData.append("position", position);
+    formData.append("description", description);
+
+    postPlayer(formData).then((response) => {});
   });
 
   displayPlayerCards();

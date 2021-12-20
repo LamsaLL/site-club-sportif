@@ -20,12 +20,12 @@
     "description": "188cm / 120kg",
     "actions": ["Modifier", "Supprimer"]
   },
-
   {
     "name": "Patrick Tuopulotu",
     "image": "img/patrick-tuopulotu.jpeg",
-    "position": "2ème ligne",
+    "position": "2\u00e8me ligne",
     "description": "198cm / 120kg",
     "actions": ["Modifier", "Supprimer"]
-  }
+  },
+  { "name": "dza", "position": "dza", "description": "dza" }
 ]
