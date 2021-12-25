@@ -16,6 +16,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     return await response.json();
   };
+  const deletePlayer = async (id) => {
+    //delete player from json file
+    const response = await fetch(
+      "php/players.php?id=" + id + "&action=delete",
+      {
+        method: "POST",
+      }
+    );
+    return await response.json();
+  };
 
   const createPlayerCards = (player) => {
     const colDiv = document.createElement("div");
@@ -63,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (session === "admin") {
       const updateButton = document.createElement("a");
-      const deleteButton = document.createElement("a");
+      const deleteButton = document.createElement("input");
 
       updateButton.setAttribute("class", "btn btn-primary");
       updateButton.setAttribute("href", "#");
@@ -71,8 +81,14 @@ document.addEventListener("DOMContentLoaded", () => {
       cardBodyDiv.appendChild(updateButton);
 
       deleteButton.setAttribute("class", "btn btn-danger");
-      deleteButton.setAttribute("href", "#");
-      deleteButton.appendChild(document.createTextNode("Supprimer"));
+      deleteButton.setAttribute("type", "submit");
+      deleteButton.setAttribute("value", "Supprimer");
+      deleteButton.setAttribute("name", player.id);
+      deleteButton.addEventListener("click", async (e) => {
+        e.preventDefault();
+        await deletePlayer(player.id);
+        document.getElementById("card-group").removeChild(colDiv);
+      });
       cardBodyDiv.appendChild(deleteButton);
     } else if (session === "user") {
       const discoverLink = document.createElement("a");
@@ -102,10 +118,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const description = document.getElementById("addDescription").value;
     const image = document.getElementById("addImage").value;
 
+    //get random int between 1 and 999
+    const id = Math.floor(Math.random() * 999) + 1;
     //new form data
     const formData = new FormData();
 
     //add form data to formData
+    formData.append("id", id);
     formData.append("name", name);
     formData.append("position", position);
     formData.append("description", description);

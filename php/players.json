@@ -1,31 +1,30 @@
 [
   {
+    "id": "0",
     "name": "Dane Coles",
     "image": "img/dane-coles.jpeg",
     "position": "Talonneur",
-    "description": "183cm / 110kg",
-    "actions": ["Modifier", "Supprimer"]
+    "description": "183cm / 110kg"
   },
   {
+    "id": "1",
     "name": "George Bower",
     "image": "img/george-bower.jpg",
     "position": "Pillier",
-    "description": "186cm / 120kg",
-    "actions": ["Modifier", "Supprimer"]
+    "description": "186cm / 120kg"
   },
   {
+    "id": "2",
     "name": "Joe Moody",
     "image": "img/joe-moody.jpeg",
     "position": "Pillier",
-    "description": "188cm / 120kg",
-    "actions": ["Modifier", "Supprimer"]
+    "description": "188cm / 120kg"
   },
   {
+    "id": "3",
     "name": "Patrick Tuopulotu",
     "image": "img/patrick-tuopulotu.jpeg",
     "position": "2\u00e8me ligne",
-    "description": "198cm / 120kg",
-    "actions": ["Modifier", "Supprimer"]
-  },
-  { "name": "dza", "position": "dza", "description": "dza" }
+    "description": "198cm / 120kg"
+  }
 ]
