@@ -204,14 +204,22 @@
             </form>
 
             <form id="edit-player-form">
-                <label for="editName">Nom</label>
-                <input type="text" name="editName" id="editName" required />
-                <label for="editImage">Image</label>
-                <input type="text" name="editImage" id="editImage" required />
-                <label for="editPosition">Poste</label>
-                <input type="text" name="editPosition" id="editPosition" required />
-                <label for="editDescription">Description</label>
-                <input type="text" name="editDescription" id="editDescription" required />
+                <div id="form-group">
+                    <label for="editName">Nom</label>
+                    <input type="text" name="editName" id="editName" required />
+                </div>
+                <div id="form-group">
+                    <label for="editImage">Image</label>
+                    <input type="text" name="editImage" id="editImage" required />
+                </div>
+                <div id="form-group">
+                    <label for="editPosition">Poste</label>
+                    <input type="text" name="editPosition" id="editPosition" required />
+                </div>
+                <div id="form-group">
+                    <label for="editDescription">Description</label>
+                    <input type="text" name="editDescription" id="editDescription" required />
+                </div>
                 <input type="submit" value="Modifier" />
             </form>
 

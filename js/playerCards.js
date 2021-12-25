@@ -10,12 +10,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const postPlayer = async (player) => {
     //post player to json file
-    const response = await fetch("php/players.php", {
+    const response = await fetch("php/players.php?action=create", {
       method: "POST",
       body: player,
     });
     return await response.json();
   };
+
   const deletePlayer = async (id) => {
     //delete player from json file
     const response = await fetch(
@@ -25,6 +26,58 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     );
     return await response.json();
+  };
+
+  const updatePlayer = async (id, player) => {
+    //update player in json file
+    const response = await fetch(
+      "php/players.php?id=" + id + "&action=update",
+      {
+        method: "POST",
+        body: player,
+      }
+    );
+    return await response.json();
+  };
+
+  const fillUpdateForm = (fields) => {
+    Object.entries(fields).map(([key, value]) => {
+      document.getElementById(`${key}`).value = value;
+    });
+  };
+
+  const showUpdateForm = (player) => {
+    const editPlayerForm = document.getElementById("edit-player-form");
+    editPlayerForm.style.display = "block";
+
+    const fields = {
+      editName: player.name,
+      editImage: player.image,
+      editPosition: player.position,
+      editDescription: player.description,
+    };
+
+    fillUpdateForm(fields);
+
+    editPlayerForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const data = new FormData(event.target);
+      const value = Object.fromEntries(data.entries());
+
+      const formData = new FormData();
+
+      //add form data to formData
+      formData.append("id", player.id);
+      formData.append("name", value.editName);
+      formData.append("image", value.editImage);
+      formData.append("position", value.editPosition);
+      formData.append("description", value.editDescription);
+
+      updatePlayer(player.id, formData).then((response) => {
+        console.log(response);
+      });
+    });
   };
 
   const createPlayerCards = (player) => {
@@ -78,6 +131,10 @@ document.addEventListener("DOMContentLoaded", () => {
       updateButton.setAttribute("class", "btn btn-primary");
       updateButton.setAttribute("href", "#");
       updateButton.appendChild(document.createTextNode("Modifier"));
+      updateButton.addEventListener("click", () => {
+        showUpdateForm(player);
+      });
+
       cardBodyDiv.appendChild(updateButton);
 
       deleteButton.setAttribute("class", "btn btn-danger");
