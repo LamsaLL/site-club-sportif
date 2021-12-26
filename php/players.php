@@ -31,21 +31,19 @@ if (isset($_GET['id']) && $_GET['action'] == 'update') {
     $data = json_decode($sourceJson, true);
     $id = array_search($_GET['id'], array_column($data, 'id'));
     $data[$id] = $_POST;
-    $newData = json_encode($data);
+    $newData = json_encode(array_values($data));
     file_put_contents('players.json', $newData);
     $msg = array('success' => true, 'message' => 'Joueur modifié');
     echo json_encode($msg);    
 }
 // delete an existing player
 if (isset($_GET['id']) && $_GET['action'] == 'delete') {
-    // parse_str(file_get_contents("php://input"),$post_vars);
     $sourceJson = file_get_contents('players.json');
     $data = json_decode($sourceJson, true);
     // find element in array where id = $_GET['id']
     $id = array_search($_GET['id'], array_column($data, 'id'));
     unset($data[$id]);
-    $newData = json_encode($data);
-            
+    $newData = json_encode(array_values($data));
     file_put_contents('players.json', $newData);
     $msg = array('success' => true, 'message' => 'Joueur supprimé');
     echo json_encode($msg);
