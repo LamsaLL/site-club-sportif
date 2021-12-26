@@ -80,79 +80,105 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  const createPlayerCards = (player) => {
-    const colDiv = document.createElement("div");
-    const cardDiv = document.createElement("div");
-    const img = document.createElement("img");
-    const cardBodyDiv = document.createElement("div");
-    const h5CardBody = document.createElement("h5");
-    const ul = document.createElement("ul");
-    const positionItem = document.createElement("li");
-    const descriptionItem = document.createElement("li");
+  //function to generalize the creation of HTML DOM element
+  const createElement = (
+    element,
+    className,
+    style = null,
+    src = null,
+    type = null,
+    value = null
+  ) => {
+    const newElement = document.createElement(element);
+    newElement.className = className;
+    if (style) newElement.style = style;
+    if (src) newElement.src = src;
+    if (type) newElement.type = type;
+    if (value) newElement.value = value;
+
+    return newElement;
+  };
+
+  const createPlayerCard = (player) => {
     const session = document.getElementById("session").value;
 
-    colDiv.setAttribute("class", "col");
+    const colDiv = createElement("div", "col");
 
-    cardDiv.setAttribute("class", "card");
-
+    const cardDiv = createElement("div", "card");
     colDiv.appendChild(cardDiv);
 
-    img.setAttribute("src", player.image);
-    img.setAttribute("class", "card-img-top");
-    img.setAttribute("style", "height: 25vw; object-fit: cover");
+    const img = createElement(
+      "img",
+      "card-img-top",
+      "height: 25vw; object-fit: cover",
+      player.image
+    );
     cardDiv.appendChild(img);
 
-    cardBodyDiv.setAttribute("class", "card-body");
+    const cardBodyDiv = createElement("div", "card-body");
     cardDiv.appendChild(cardBodyDiv);
 
-    h5CardBody.setAttribute("class", "card-title");
+    const h5CardBody = createElement("h5", "card-title");
     h5CardBody.appendChild(document.createTextNode(player.name));
     cardBodyDiv.appendChild(h5CardBody);
 
-    ul.setAttribute("class", "list-group list-group-flush");
+    const ul = createElement("ul", "list-group list-group-flush");
     cardBodyDiv.appendChild(ul);
 
-    positionItem.setAttribute("class", "list-group-item");
+    const positionItem = createElement("li", "list-group-item");
     positionItem.appendChild(
       document.createTextNode("Position: " + player.position)
     );
     ul.appendChild(positionItem);
 
-    descriptionItem.setAttribute("class", "list-group-item");
+    const descriptionItem = createElement("li", "list-group-item");
     descriptionItem.appendChild(
       document.createTextNode("Description: " + player.description)
     );
     ul.appendChild(descriptionItem);
 
     if (session === "admin") {
-      const updateButton = document.createElement("a");
-      const deleteButton = document.createElement("input");
+      const updateButton = createElement(
+        "input",
+        "btn btn-primary",
+        null,
+        null,
+        "submit",
+        "Modifier"
+      );
 
-      updateButton.setAttribute("class", "btn btn-primary");
-      updateButton.setAttribute("href", "#");
-      updateButton.appendChild(document.createTextNode("Modifier"));
       updateButton.addEventListener("click", () => {
         showUpdateForm(player);
       });
 
       cardBodyDiv.appendChild(updateButton);
 
-      deleteButton.setAttribute("class", "btn btn-danger");
-      deleteButton.setAttribute("type", "submit");
-      deleteButton.setAttribute("value", "Supprimer");
-      deleteButton.setAttribute("name", player.id);
+      const deleteButton = createElement(
+        "input",
+        "btn btn-danger",
+        null,
+        null,
+        "submit",
+        "Supprimer"
+      );
+
       deleteButton.addEventListener("click", async (e) => {
         e.preventDefault();
         await deletePlayer(player.id);
         document.getElementById("card-group").removeChild(colDiv);
       });
+
       cardBodyDiv.appendChild(deleteButton);
     } else if (session === "user") {
-      const discoverLink = document.createElement("a");
-      discoverLink.setAttribute("href", "#");
-      discoverLink.setAttribute("class", "btn btn-primary");
-      discoverLink.appendChild(document.createTextNode("Découvrir"));
-      cardBodyDiv.appendChild(discoverLink);
+      const discoverButton = createElement(
+        "input",
+        "btn btn-primary",
+        null,
+        null,
+        "submit",
+        "Découvrir"
+      );
+      cardBodyDiv.appendChild(discoverButton);
     }
     return colDiv;
   };
@@ -162,7 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     getPlayers().then((players) => {
       players.forEach((player) => {
-        cardGroup.appendChild(createPlayerCards(player));
+        cardGroup.appendChild(createPlayerCard(player));
       });
     });
   };
