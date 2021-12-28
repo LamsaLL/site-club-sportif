@@ -137,6 +137,10 @@ table tbody tr:hover th {
   display: none;
 }
 
+#add-player-form {
+  display: none;
+}
+
 /* media queries */
 @media (min-width: 768px) {
   #card-group {

@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const session = document.getElementById("session").value;
+
   const addPLayerForm = document.getElementById("add-player-form");
 
   const getPlayers = async () => {
@@ -100,8 +102,6 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const createPlayerCard = (player) => {
-    const session = document.getElementById("session").value;
-
     const colDiv = createElement("div", "col");
 
     const cardDiv = createElement("div", "card");
@@ -193,27 +193,31 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  //Listen on add player form
-  addPLayerForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const name = document.getElementById("addName").value;
-    const position = document.getElementById("addPosition").value;
-    const description = document.getElementById("addDescription").value;
-    const image = document.getElementById("addImage").value;
+  if (session === "admin") {
+    addPLayerForm.style.display = "block";
 
-    //get random int between 1 and 999
-    const id = Math.floor(Math.random() * 999) + 1;
-    //new form data
-    const formData = new FormData();
+    //Listen on add player form
+    addPLayerForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("addName").value;
+      const position = document.getElementById("addPosition").value;
+      const description = document.getElementById("addDescription").value;
+      const image = document.getElementById("addImage").value;
 
-    //add form data to formData
-    formData.append("id", id);
-    formData.append("name", name);
-    formData.append("position", position);
-    formData.append("description", description);
+      //get random int between 1 and 999
+      const id = Math.floor(Math.random() * 999) + 1;
+      //new form data
+      const formData = new FormData();
 
-    postPlayer(formData).then((response) => {});
-  });
+      //add form data to formData
+      formData.append("id", id);
+      formData.append("name", name);
+      formData.append("position", position);
+      formData.append("description", description);
+
+      postPlayer(formData).then((response) => {});
+    });
+  }
 
   displayPlayerCards();
 });
