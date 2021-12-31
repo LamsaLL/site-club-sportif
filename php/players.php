@@ -1,13 +1,5 @@
 <?php
 
-// // Pour modifier les données 
-// $data[0]['propriete'] = "valeur";
-// pour sauvegarder de nouveau dans le source.json
-// $newData = json_encode($data);
-// file_put_contents('source.json', $newData);
-
-//get players.json file
-
 // return all records
 if (isset($_GET['all'])) {
     $sourceJson = file_get_contents('players.json');
@@ -22,8 +14,8 @@ if (isset($_POST['name']) && isset($_POST['position']) && isset($_POST['descript
     $data[] = $_POST;
     $newData = json_encode($data);
     file_put_contents('players.json', $newData);
-    $msg = array('success' => true, 'message' => 'Joueur ajouté');
-    echo json_encode($msg);
+    // $msg = array('success' => true, 'message' => 'Joueur ajouté');
+    echo json_encode($_POST);
 }
 // update an existing player
 if (isset($_GET['id']) && $_GET['action'] == 'update') {
@@ -33,8 +25,8 @@ if (isset($_GET['id']) && $_GET['action'] == 'update') {
     $data[$id] = $_POST;
     $newData = json_encode(array_values($data));
     file_put_contents('players.json', $newData);
-    $msg = array('success' => true, 'message' => 'Joueur modifié');
-    echo json_encode($msg);    
+    // $msg = array('success' => true, 'message' => 'Joueur modifié');
+    echo json_encode($_POST);    
 }
 // delete an existing player
 if (isset($_GET['id']) && $_GET['action'] == 'delete') {

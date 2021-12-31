@@ -76,8 +76,17 @@ document.addEventListener("DOMContentLoaded", () => {
       formData.append("position", value.editPosition);
       formData.append("description", value.editDescription);
 
-      updatePlayer(player.id, formData).then((response) => {
-        console.log(response);
+      updatePlayer(player.id, formData).then((player) => {
+        //Update player card values
+        const playerCard = document.getElementById(`player-card-${player.id}`);
+        playerCard.querySelector(".player-name").textContent = player.name;
+        playerCard.querySelector(".player-position").textContent =
+          player.position;
+        playerCard.querySelector(".player-description").textContent =
+          player.description;
+        playerCard.querySelector(".player-image").src = player.image;
+
+        editPlayerForm.style.display = "none";
       });
     });
   };
@@ -86,13 +95,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const createElement = (
     element,
     className,
+    id = null,
     style = null,
     src = null,
     type = null,
     value = null
   ) => {
     const newElement = document.createElement(element);
-    newElement.className = className;
+
+    console.log(className);
+    //if className is array
+
+    newElement.classList.add(...className);
+
+    if (id) newElement.id = id;
     if (style) newElement.style = style;
     if (src) newElement.src = src;
     if (type) newElement.type = type;
@@ -102,36 +118,43 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const createPlayerCard = (player) => {
-    const colDiv = createElement("div", "col");
+    const colDiv = createElement("div", ["col"]);
 
-    const cardDiv = createElement("div", "card");
+    const cardDiv = createElement("div", ["card"], `player-card-${player.id}`);
     colDiv.appendChild(cardDiv);
 
     const img = createElement(
       "img",
-      "card-img-top",
+      ["card-img-top", "player-image"],
+      null,
       "height: 25vw; object-fit: cover",
       player.image
     );
     cardDiv.appendChild(img);
 
-    const cardBodyDiv = createElement("div", "card-body");
+    const cardBodyDiv = createElement("div", ["card-body"]);
     cardDiv.appendChild(cardBodyDiv);
 
-    const h5CardBody = createElement("h5", "card-title");
+    const h5CardBody = createElement("h5", ["card-title", "player-name"]);
     h5CardBody.appendChild(document.createTextNode(player.name));
     cardBodyDiv.appendChild(h5CardBody);
 
-    const ul = createElement("ul", "list-group list-group-flush");
+    const ul = createElement("ul", ["list-group", "list-group-flush"]);
     cardBodyDiv.appendChild(ul);
 
-    const positionItem = createElement("li", "list-group-item");
+    const positionItem = createElement("li", [
+      "list-group-item",
+      "player-position",
+    ]);
     positionItem.appendChild(
       document.createTextNode("Position: " + player.position)
     );
     ul.appendChild(positionItem);
 
-    const descriptionItem = createElement("li", "list-group-item");
+    const descriptionItem = createElement("li", [
+      "list-group-item",
+      "player-description",
+    ]);
     descriptionItem.appendChild(
       document.createTextNode("Description: " + player.description)
     );
@@ -140,7 +163,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (session === "admin") {
       const updateButton = createElement(
         "input",
-        "btn btn-primary",
+        ["btn", "btn-primary"],
+        null,
         null,
         null,
         "submit",
@@ -155,7 +179,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const deleteButton = createElement(
         "input",
-        "btn btn-danger",
+        ["btn", "btn-danger"],
+        null,
         null,
         null,
         "submit",
@@ -172,7 +197,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else if (session === "user") {
       const discoverButton = createElement(
         "input",
-        "btn btn-primary",
+        ["btn", "btn-primary"],
         null,
         null,
         "submit",
@@ -183,15 +208,18 @@ document.addEventListener("DOMContentLoaded", () => {
     return colDiv;
   };
 
-  const displayPlayerCards = () => {
+  const displayPlayerCard = (player) => {
     const cardGroup = document.getElementById("card-group");
-
-    getPlayers().then((players) => {
-      players.forEach((player) => {
-        cardGroup.appendChild(createPlayerCard(player));
-      });
-    });
+    const playerCard = createPlayerCard(player);
+    cardGroup.appendChild(playerCard);
   };
+
+  //Get all players from json file and display them
+  getPlayers().then((players) => {
+    players.forEach((player) => {
+      displayPlayerCard(player);
+    });
+  });
 
   if (session === "admin") {
     addPLayerForm.style.display = "block";
@@ -209,15 +237,13 @@ document.addEventListener("DOMContentLoaded", () => {
       //new form data
       const formData = new FormData();
 
-      //add form data to formData
+      //add form datas to formData
       formData.append("id", id);
       formData.append("name", name);
       formData.append("position", position);
       formData.append("description", description);
 
-      postPlayer(formData).then((response) => {});
+      postPlayer(formData).then(displayPlayerCard);
     });
   }
-
-  displayPlayerCards();
 });
