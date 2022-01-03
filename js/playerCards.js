@@ -61,6 +61,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     fillUpdateForm(fields);
 
+    location.href = "#edit-player-form";
+
     editPlayerForm.addEventListener("submit", (event) => {
       event.preventDefault();
 
@@ -76,17 +78,10 @@ document.addEventListener("DOMContentLoaded", () => {
       formData.append("position", value.editPosition);
       formData.append("description", value.editDescription);
 
-      updatePlayer(player.id, formData).then((player) => {
-        //Update player card values
-        const playerCard = document.getElementById(`player-card-${player.id}`);
-        playerCard.querySelector(".player-name").textContent = player.name;
-        playerCard.querySelector(".player-position").textContent =
-          player.position;
-        playerCard.querySelector(".player-description").textContent =
-          player.description;
-        playerCard.querySelector(".player-image").src = player.image;
-
+      updatePlayer(player.id, formData).then((playerUpdated) => {
         editPlayerForm.style.display = "none";
+        //reload
+        location.reload();
       });
     });
   };
@@ -102,10 +97,6 @@ document.addEventListener("DOMContentLoaded", () => {
     value = null
   ) => {
     const newElement = document.createElement(element);
-
-    console.log(className);
-    //if className is array
-
     newElement.classList.add(...className);
 
     if (id) newElement.id = id;
@@ -198,6 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const discoverButton = createElement(
         "input",
         ["btn", "btn-primary"],
+        null,
         null,
         null,
         "submit",
